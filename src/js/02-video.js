@@ -7,7 +7,11 @@ const player = new Player(iframe);
 
 const CURRENT_TIME = "videoplayer-current-time";
 
-localStorage.setItem('CURRENT_TIME', JSON.stringify(CURRENT_TIME));
+player.on('timeupdate', throttle(savedSesionTime, 1000));
+
+function savedSesionTime(evt) {
+ localStorage.setItem('CURRENT_TIME', JSON.stringify(evn));   
+}
 
 updatedTime();
 
@@ -18,9 +22,9 @@ function updatedTime() {
         return;
     }
 
-    const savedTime = JSON.parse((stopTime).seconds);
+    const savedTime = JSON.parse(localStorage.getItem(CURRENT_TIME)).seconds;
    
-    player.setCurrentTime(savedTime).then(function(seconds) {
+    player.setCurrentTime(savedTime).then(function() {
     // seconds = the actual time that the player seeked to
     }).catch(function(error) {
     switch (error.name) {
