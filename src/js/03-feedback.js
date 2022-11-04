@@ -11,6 +11,11 @@ refs.form.addEventListener('input', throttle(onTextareaInput), 500);
 const STORAGE_KEY = 'feedback-form-state';
 const savedText = localStorage.getItem(STORAGE_KEY);
 
+function onFormInput(e) {
+    formData[e.target.name] = e.target.volue;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(formData))
+};
+
 populateTextarea();
 let formData;
 
@@ -29,6 +34,10 @@ function onFormSubmit(evn) {
     } else formData = {};
 
     evn.target.reset();
+    console.log(formData);
+
+    formData = {};
+
     localStorage.removeItem(STORAGE_KEY);
 };
 
@@ -38,15 +47,10 @@ function onTextareaInput(evn) {
     localStorage.setItem(STORAGE_KEY, massage);
 };
 
-function populateTextarea(evn) {
+function populateTextarea() {
     const saveMessage = localStorage.getItem(STORAGE_KEY);
 
     if (saveMessage) {
         refs.textForm.value = saveMessage;
     }
 };
-
-refs.form.addEventListener('input', e => {
-    formData[e.target.name] = e.target.volue;
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(formData))
-});

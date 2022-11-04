@@ -9,18 +9,14 @@ const CURRENT_TIME = "videoplayer-current-time";
 
 player.on('timeupdate', throttle(savedSesionTime, 1000));
 
-function savedSesionTime(evt) {
- localStorage.setItem('CURRENT_TIME', JSON.stringify(evn));   
+function savedSesionTime(time) {
+ localStorage.setItem('CURRENT_TIME', JSON.stringify(time));  
 }
 
 updatedTime();
 
 function updatedTime() {
     const stopTime = localStorage.getItem(CURRENT_TIME); 
-  
-    if (!stopTime) {
-        return;
-    }
 
     const savedTime = JSON.parse(localStorage.getItem(CURRENT_TIME)).seconds;
    
