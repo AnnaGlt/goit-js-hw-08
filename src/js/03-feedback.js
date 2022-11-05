@@ -5,11 +5,12 @@ const refs = {
     textForm: document.querySelectorAll('.feedback-form__item'),
 };
 
-refs.form.addEventListener('submit', onFormSubmit);
-refs.form.addEventListener('input', throttle(onTextareaInput), 500);
-
 const STORAGE_KEY = 'feedback-form-state';
 const savedText = localStorage.getItem(STORAGE_KEY);
+const formData = JSON.parse(savedText) || {};
+
+refs.form.addEventListener('submit', onFormSubmit);
+refs.form.addEventListener('input', throttle(onTextareaInput), 500);
 
 function onFormInput(e) {
     formData[e.target.name] = e.target.volue;
@@ -17,27 +18,13 @@ function onFormInput(e) {
 };
 
 populateTextarea();
-let formData;
 
 function onFormSubmit(evn) {
     evn.preventDefault();
-
-    for (const element of refs.textForm) {
-        if (!element.value) {
-            window.alert("Please enter data in all fields of the form");
-            return;
-        }
-    };
-
-    if (savedText) {
-        formData = JSON.parse(savedText);
-    } else formData = {};
-
+    
     evn.target.reset();
-    console.log(formData);
-
     formData = {};
-
+    console.log(formData);
     localStorage.removeItem(STORAGE_KEY);
 };
 
@@ -48,9 +35,10 @@ function onTextareaInput(evn) {
 };
 
 function populateTextarea() {
-    const saveMessage = localStorage.getItem(STORAGE_KEY);
+    const saveMessage = JSON.parse(localStorage.getItem(STORAGE_KEY));
 
     if (saveMessage) {
-        refs.textForm.value = saveMessage;
+        refs.textForm.value = saveMessage.email || '';
+        refs.textForm.value = saveMessage.massage || '';
     }
 };
