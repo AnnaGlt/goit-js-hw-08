@@ -36,7 +36,7 @@ function populateTextarea() {
 
 
     if (saveMessage) {
-        refs.textForm.email = saveMessage.email || '';
-        refs.textForm.message = saveMessage.message || '';
+        refs.textForm.email = saveMessage.email;
+        refs.textForm.message = saveMessage.message;
     }
 };
