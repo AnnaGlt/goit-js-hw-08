@@ -22,6 +22,7 @@ function onFormSubmit(evn) {
     evn.preventDefault();
     
     evn.target.reset();
+    formData = {};
     
     console.log(formData);
     localStorage.removeItem(STORAGE_KEY);
@@ -30,11 +31,10 @@ function onFormSubmit(evn) {
 function populateTextarea() {
     const saveMessage = JSON.parse(localStorage.getItem(STORAGE_KEY));
 
-    if (saveMessage.hasOwnProperty('email')) {
-        refs.form.email = saveMessage.email;
+    if (saveMessage?.hasOwnProperty('email')) {
+        refs.form.email.value = saveMessage.email;
     };
-
-    if (saveMessage.hasOwnProperty('message')) {
-        refs.form.message = saveMessage.message;
+    if (saveMessage?.hasOwnProperty('message')) {
+        refs.form.message.value = saveMessage.message;
     };
 };
