@@ -10,15 +10,16 @@ const CURRENT_TIME = "videoplayer-current-time";
 player.on('timeupdate', throttle(savedSesionTime, 1000));
 
 function savedSesionTime(time) {
- localStorage.setItem('CURRENT_TIME', JSON.stringify(time));  
+ localStorage.setItem(CURRENT_TIME, time.seconds);  
 }
+
+console.log(CURRENT_TIME);
 
 updatedTime();
 
 function updatedTime() {
-    const stopTime = localStorage.getItem(CURRENT_TIME); 
 
-    const savedTime = JSON.parse(localStorage.getItem(CURRENT_TIME)).seconds;
+    const savedTime =localStorage.getItem(CURRENT_TIME);
    
     player.setCurrentTime(savedTime).then(function() {
     // seconds = the actual time that the player seeked to

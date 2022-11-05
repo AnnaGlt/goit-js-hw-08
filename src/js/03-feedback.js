@@ -29,7 +29,7 @@ function onFormSubmit(evn) {
 };
 
 function populateTextarea() {
-    const saveMessage = JSON.parse(savedText);
+    const saveMessage = JSON.parse(localStorage.getItem(STORAGE_KEY));
 
     if (saveMessage) {
         refs.textForm.value = saveMessage.email || '';
