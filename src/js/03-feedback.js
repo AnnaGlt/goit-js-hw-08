@@ -31,8 +31,12 @@ function onFormSubmit(evn) {
 function populateTextarea() {
     const saveMessage = JSON.parse(localStorage.getItem(STORAGE_KEY));
 
+    console.log(saveMessage.email);
+    console.log(saveMessage.message);
+
+
     if (saveMessage) {
-        refs.textForm.value = saveMessage.email || '';
-        refs.textForm.value = saveMessage.message || '';
+        refs.textForm.email = saveMessage.email || '';
+        refs.textForm.message = saveMessage.message || '';
     }
 };
